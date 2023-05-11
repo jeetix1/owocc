@@ -70,3 +70,36 @@ $(document).ready(function() {
         });
     });
 });
+
+setInterval(function(){
+    var cookieMonster = $('<img class="cookie-monster" src="cookie-monster.png">');
+    var x = Math.floor(Math.random() * ($(window).width() - cookieMonster.width()));
+    var y = Math.floor(Math.random() * ($(window).height() - cookieMonster.height()));
+    cookieMonster.css({top: y, left: x});
+    $('body').append(cookieMonster);
+
+    // Click event for cookie monster
+    cookieMonster.click(function() {
+        $(this).fadeOut(500, function() {
+            $(this).remove();
+        });
+    });
+
+    // Cookie monster steals cookies every second until chased away
+    var monsterInterval = setInterval(function() {
+        if ($('#cookieCount').text() > 0) {
+            $.ajax({
+                url: 'removeCookie.php',
+                success: function(data) {
+                    $('#cookieCount').text(data);
+                }
+            });
+        }
+    }, 1000);
+
+    // When cookie monster is removed, stop stealing cookies
+    cookieMonster.on('remove', function() {
+        clearInterval(monsterInterval);
+    });
+
+}, 300000); // Cookie monster appears every 5 minutes (300 seconds)
