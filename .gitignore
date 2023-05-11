@@ -1,0 +1,4 @@
+# cPanel stuff
+public/.well-known/*
+public/cgi-bin/*
+public/.htaccess
