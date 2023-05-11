@@ -61,6 +61,28 @@ $stmt->bind_param("is", $cookieCount, $username);
 $stmt->execute();
 $stmt->close();
 $conn->close();
+
+// Retrieve the top 10 players from the database
+$conn = new mysqli($servername, $username_db, $password_db, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$topPlayersQuery = "SELECT username, cookie_count FROM users ORDER BY cookie_count DESC LIMIT 10";
+$topPlayersResult = $conn->query($topPlayersQuery);
+$topPlayers = array();
+
+if ($topPlayersResult->num_rows > 0) {
+    while ($row = $topPlayersResult->fetch_assoc()) {
+        $player = array(
+            'username' => $row['username'],
+            'cookieCount' => $row['cookie_count']
+        );
+        $topPlayers[] = $player;
+    }
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +96,9 @@ $conn->close();
 <h1>Cookie Clicker</h1>
 
 <!-- Display the current number of cookies -->
-<div class="cookie-count">Cookies: <span id="cookieCount"><?= $_SESSION['cookieCount'] ?></span></div>
+<div class="cookie-count">Cookies: <span id="cookieCount"><?= $_SESSION['cookieCount'] ?></span>
+
+</div>
 
 <!-- Cookie image to click and add a cookie -->
 <div class="cookie-container" id="cookieBtn">
@@ -83,6 +107,31 @@ $conn->close();
 
 <!-- Small cookie image to display when the cookie image is clicked -->
 <img class="small-cookie" id="smallCookie" src="cookie-small.png" alt="Small Cookie">
+
+<!-- Scoreboard to display top 10 players and their scores -->
+<h2>Scoreboard</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Player</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $rank = 1;
+        foreach ($topPlayers as $player) {
+            echo "<tr>";
+            echo "<td>" . $rank . "</td>";
+            echo "<td>" . $player['username'] . "</td>";
+            echo "<td>" . $player['cookieCount'] . "</td>";
+            echo "</tr>";
+            $rank++;
+        }
+        ?>
+    </tbody>
+</table>
 
 <!-- JavaScript to send an AJAX request when the cookie image is clicked and to display a small cookie at a random location on the screen -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
