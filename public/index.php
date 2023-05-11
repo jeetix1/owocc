@@ -68,7 +68,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$topPlayersQuery = "SELECT username, cookie_count FROM users ORDER BY cookie_count DESC LIMIT 10";
+$topPlayersQuery = "SELECT username, cookie_count FROM users ORDER BY cookie_count DESC LIMIT 20";
 $topPlayersResult = $conn->query($topPlayersQuery);
 $topPlayers = array();
 
@@ -94,6 +94,7 @@ $conn->close();
 <body>
 
 <h1>Cookie Clicker</h1>
+<p>Ongoing development on production here! expect weird things happening ;3</p>
 
 <!-- Display the current number of cookies -->
 <div class="cookie-count">Cookies: <span id="cookieCount"><?= $_SESSION['cookieCount'] ?></span>
@@ -108,7 +109,7 @@ $conn->close();
 <!-- Small cookie image to display when the cookie image is clicked -->
 <img class="small-cookie" id="smallCookie" src="cookie-small.png" alt="Small Cookie">
 
-<!-- Scoreboard to display top 10 players and their scores -->
+<!-- Scoreboard to display top 20 players and their scores -->
 <h2>Scoreboard</h2>
 <table>
     <thead>
@@ -134,7 +135,7 @@ $conn->close();
 </table>
 
 <!-- JavaScript to send an AJAX request when the cookie image is clicked and to display a small cookie at a random location on the screen -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="assets/vendor/jquery-3.6.0.min.js"></script>
 <script src="script.js"></script>
 
 </body>
