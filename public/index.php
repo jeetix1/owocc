@@ -1,4 +1,5 @@
 <?php
+include './../config.php';
 session_start();
 
 // If the username is not set in the session, check if it is in the URL parameters
@@ -16,11 +17,6 @@ if (!isset($_SESSION['username'])) {
 $username = $_SESSION['username'];
 
 // Connect to the database and check if the user exists
-$servername = "localhost";
-$dbname = "dev_owo";
-$username_db = "dev_owo";
-$password_db = "SuperSecret+Bonus";
-
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

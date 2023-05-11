@@ -1,4 +1,5 @@
 <?php
+include './../config.php';
 session_start();
 
 // If the username is not set in the session, redirect to login.php
@@ -16,10 +17,7 @@ if (!isset($_SESSION['cookieCount'])) {
 $_SESSION['cookieCount']++;
 $username = $_SESSION['username'];
 $cookieCount = $_SESSION['cookieCount'];
-$servername = "localhost";
-$dbname = "dev_owo";
-$username_db = "dev_owo";
-$password_db = "SuperSecret+Bonus";
+
 
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 if ($conn->connect_error) {
