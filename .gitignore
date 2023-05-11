@@ -2,3 +2,4 @@
 public/.well-known/*
 public/cgi-bin/*
 public/.htaccess
+config.php
