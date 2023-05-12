@@ -127,3 +127,15 @@ body {
     50% { transform: translateY(-20px); }
     100% { transform: translateY(0); }
 }
+
+
+@keyframes pulse {
+    0% { background-color: transparent; }
+    50% { background-color: #183a18; }
+    /* 50% { background-color: #25393e; } */
+    100% { background-color: transparent; }
+}
+
+.active-player {
+    animation: pulse 5s infinite;
+}

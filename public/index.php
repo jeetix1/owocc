@@ -68,19 +68,25 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$topPlayersQuery = "SELECT username, cookie_count FROM users ORDER BY cookie_count DESC LIMIT 20";
+$topPlayersQuery = "SELECT username, cookie_count, updated_at FROM users ORDER BY cookie_count DESC LIMIT 20";
 $topPlayersResult = $conn->query($topPlayersQuery);
 $topPlayers = array();
 
 if ($topPlayersResult->num_rows > 0) {
     while ($row = $topPlayersResult->fetch_assoc()) {
+        $now = new DateTime();
+        $updated_at = new DateTime($row['updated_at']);
+        $interval = $now->diff($updated_at);
+        $active = ($interval->h > 1 && $interval->days == 0) ? true : false;
         $player = array(
             'username' => $row['username'],
-            'cookieCount' => $row['cookie_count']
+            'cookieCount' => $row['cookie_count'],
+            'active' => $active
         );
         $topPlayers[] = $player;
     }
 }
+
 
 $conn->close();
 ?>
@@ -120,18 +126,19 @@ $conn->close();
         </tr>
     </thead>
     <tbody>
-        <?php
-        $rank = 1;
-        foreach ($topPlayers as $player) {
-            echo "<tr>";
-            echo "<td>" . $rank . "</td>";
-            echo "<td>" . $player['username'] . "</td>";
-            echo "<td>" . $player['cookieCount'] . "</td>";
-            echo "</tr>";
-            $rank++;
-        }
-        ?>
-    </tbody>
+    <?php
+    $rank = 1;
+    foreach ($topPlayers as $player) {
+        $activeClass = $player['active'] ? 'active-player' : '';
+        echo "<tr class='$activeClass'>";
+        echo "<td>" . $rank . "</td>";
+        echo "<td>" . $player['username'] . "</td>";
+        echo "<td>" . $player['cookieCount'] . "</td>";
+        echo "</tr>";
+        $rank++;
+    }
+    ?>
+</tbody>
 </table>
 
 <!-- JavaScript to send an AJAX request when the cookie image is clicked and to display a small cookie at a random location on the screen -->
