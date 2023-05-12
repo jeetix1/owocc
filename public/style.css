@@ -204,8 +204,7 @@ body {
     animation: textclip 2s linear infinite;
     display: inline-block;
     font-weight: bold;
-    font-size: 50px;
-    text-shadow: 1fr 1fr 2fr rgba(0, 0, 0, 0.3);
+    font-size: 2em;
 }
 
 @keyframes textclip {
@@ -238,4 +237,12 @@ body {
     50% {
         transform: translateY(-5px);
     }
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+    line-height: 1.2;
+    opacity: 50%;
 }

@@ -98,12 +98,41 @@ $conn->close();
 </head>
 
 <body>
-    <h1>OwO Cookie Clicker!</h1>
-    <p>Ongoing development on production here! expect weird things happening ;3</p>
+    <link rel="stylesheet" type="text/css" href="assets/css/flip_text_animation.css">
+    <div class="waviy">
+        <h1>
+            <span style="--i:1">O</span>
+            <span style="--i:2">w</span>
+            <span style="--i:3">O</span>
+            <span style="--i:4"> </span>
+            <span style="--i:5">C</span>
+            <span style="--i:6">o</span>
+            <span style="--i:7">o</span>
+            <span style="--i:8">k</span>
+            <span style="--i:9">i</span>
+            <span style="--i:10">e</span>
+            <span style="--i:11"> </span>
+            <span style="--i:12">C</span>
+            <span style="--i:13">l</span>
+            <span style="--i:14">i</span>
+            <span style="--i:15">c</span>
+            <span style="--i:16">k</span>
+            <span style="--i:17">e</span>
+            <span style="--i:18">r</span>
+            <span style="--i:19">!</span>
+        </h1>
+    </div>
+    <!-- <p>The Epitome of Stable Code!<br> Developed in Production and Merged Straight to Master!<br> What Could Possibly Go Wrong? 😄</p> -->
+    <p class="subtitle">
+    The Epitome of Stable Code!<br>
+    Developed in Production and Merged Straight to Master!<br>
+    What Could Possibly Go Wrong? 😄
+</p>
+
     <div class="cookie-count">
         <span class="username"><?= $username ?></span> is a Cookie Master!
-        <br>
-        They have collected <span id="cookieCount" class="count"><?= $_SESSION['cookieCount'] ?></span> Cookies! OMG!
+        <br><br><br>
+        <span id="cookieCount" class="count"><?= $_SESSION['cookieCount'] ?> Cookies!</span>
     </div>
 
     <!-- Cookie image to click and add a cookie -->
