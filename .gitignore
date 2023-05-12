@@ -5,3 +5,4 @@ public/.htaccess
 
 # Configuration not updated version on git!
 config.php
+public/logs/*
