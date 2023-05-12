@@ -93,20 +93,16 @@ $conn->close();
 <html>
 
 <head>
-    <title>Cookie Clicker</title>
+    <title>OwO Cookie Clicker!</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-
-    <h1>Cookie Clicker</h1>
+    <h1>OwO Cookie Clicker!</h1>
     <p>Ongoing development on production here! expect weird things happening ;3</p>
-
-    <!-- Display the current number of cookies -->
-    <div class="cookie-count">Cookies: <span id="cookieCount">
+    <div class="cookie-count"><?= $username ?> has  <span id="cookieCount">
             <?= $_SESSION['cookieCount'] ?>
-        </span>
-
+        </span> Cookies! OMG!
     </div>
 
     <!-- Cookie image to click and add a cookie -->
