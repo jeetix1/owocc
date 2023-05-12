@@ -76,7 +76,7 @@ if ($topPlayersResult->num_rows > 0) {
         $now = new DateTime();
         $updated_at = new DateTime($row['updated_at']);
         $interval = $now->diff($updated_at);
-        $active = ($interval->h > 1 && $interval->days == 0) ? true : false;
+        $active = ($interval->i >= 30) ? true : false;
         $player = array(
             'username' => $row['username'],
             'cookieCount' => $row['cookie_count'],
@@ -85,6 +85,7 @@ if ($topPlayersResult->num_rows > 0) {
         $topPlayers[] = $player;
     }
 }
+
 
 $conn->close();
 ?>
