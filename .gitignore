@@ -6,3 +6,4 @@ public/.htaccess
 # Configuration not updated version on git!
 config-sensitive.php
 public/logs/*
+cookie-titles.sql
