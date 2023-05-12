@@ -15,12 +15,13 @@ if (!isset($_SESSION['username'])) {
 
 $username = $_SESSION['username'];
 
-// Connect to the database and check if the user exists
+// Connect to the database
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Prepare the statement to check if the user exists
 $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
@@ -38,7 +39,6 @@ if ($result->num_rows == 0) {
 }
 
 $stmt->close();
-$conn->close();
 
 // If the cookie count is not set, initialize it to 0
 if (!isset($_SESSION['cookieCount'])) {
@@ -50,23 +50,13 @@ $_SESSION['cookieCount']++;
 
 $cookieCount = $_SESSION['cookieCount'];
 
-$conn = new mysqli($servername, $username_db, $password_db, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+// Prepare the statement to update the user's cookie count
 $stmt = $conn->prepare("UPDATE users SET cookie_count = ? WHERE username = ?");
 $stmt->bind_param("is", $cookieCount, $username);
 $stmt->execute();
 $stmt->close();
-$conn->close();
 
 // Retrieve the top players from the database
-$conn = new mysqli($servername, $username_db, $password_db, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $topPlayersQuery = "SELECT username, cookie_count, updated_at FROM users ORDER BY cookie_count DESC LIMIT 20";
 $topPlayersResult = $conn->query($topPlayersQuery);
 $topPlayers = array();
@@ -87,7 +77,6 @@ if ($topPlayersResult->num_rows > 0) {
 }
 
 
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -125,15 +114,39 @@ $conn->close();
     </div>
     <!-- <p>The Epitome of Stable Code!<br> Developed in Production and Merged Straight to Master!<br> What Could Possibly Go Wrong? 😄</p> -->
     <p class="subtitle">
-    The Epitome of Stable Code!<br>
-    Developed in Production and Merged Straight to Master!<br>
-    What Could Possibly Go Wrong? 😄
-</p>
+        The Epitome of Stable Code!<br>
+        Developed in Production and Merged Straight to Master!<br>
+        What Could Possibly Go Wrong? 😄
+    </p>
+    <?php
+    function getCookieTitle($cookieCount, $conn)
+    {
+        $stmt = $conn->prepare("SELECT title FROM cookie_titles WHERE ? BETWEEN min_count AND max_count");
+        $stmt->bind_param("i", $cookieCount);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        $conn->close();
+
+        if ($row) {
+            return $row['title'];
+        }
+
+        // Default title if count doesn't fall within any range
+        return "Cookie Rookie!";
+    }
+    ?>
 
     <div class="cookie-count">
-        <span class="username"><?= $username ?></span> is a Cookie Master!
+        <span class="username">
+            <?= $username ?>
+        </span>
+        <?= getCookieTitle($_SESSION['cookieCount'], $conn) ?>
         <br><br><br>
-        <span id="cookieCount" class="count"><?= $_SESSION['cookieCount'] ?> Cookies!</span>
+        <span id="cookieCount" class="count">
+            <?= $_SESSION['cookieCount'] ?> Cookies!
+        </span>
     </div>
 
     <!-- Cookie image to click and add a cookie -->
@@ -167,6 +180,7 @@ $conn->close();
                     echo "</tr>";
                     $rank++;
                 }
+
                 ?>
             </tbody>
         </table>
@@ -177,4 +191,5 @@ $conn->close();
     <script src="script.js"></script>
 
 </body>
+
 </html>
