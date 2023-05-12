@@ -144,30 +144,32 @@ $conn->close();
     <img class="small-cookie" id="smallCookie" src="cookie-small.png" alt="Small Cookie">
 
     <!-- Scoreboard to display top 20 players and their scores -->
-    <h2>Scoreboard</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Player</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $rank = 1;
-            foreach ($topPlayers as $player) {
-                $activeClass = $player['active'] ? 'active-player' : '';
-                echo "<tr class='$activeClass'>";
-                echo "<td>" . $rank . "</td>";
-                echo "<td>" . $player['username'] . "</td>";
-                echo "<td>" . $player['cookieCount'] . "</td>";
-                echo "</tr>";
-                $rank++;
-            }
-            ?>
-        </tbody>
-    </table>
+    <div class="scoreboard">
+        <h2>Scoreboard</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $rank = 1;
+                foreach ($topPlayers as $player) {
+                    $activeClass = $player['active'] ? 'active-player' : '';
+                    echo "<tr class='$activeClass'>";
+                    echo "<td>" . $rank . "</td>";
+                    echo "<td>" . $player['username'] . "</td>";
+                    echo "<td>" . $player['cookieCount'] . "</td>";
+                    echo "</tr>";
+                    $rank++;
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 
     <!-- JavaScript to send an AJAX request when the cookie image is clicked and to display a small cookie at a random location on the screen -->
     <script src="assets/vendor/jquery-3.6.0.min.js"></script>

@@ -246,3 +246,42 @@ body {
     line-height: 1.2;
     opacity: 50%;
 }
+
+
+.scoreboard {
+    position: fixed;
+    top: 50%;
+    left: 2em;
+    transform: translateY(-50%);
+    z-index: 999;
+    background-color: #256d8f69;
+    padding: 20px;
+    font-size: 16px;
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+.scoreboard h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.scoreboard table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.scoreboard th,
+.scoreboard td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.scoreboard .active-player {
+    background-color: #e74c3c;
+    color: #fff;
+}
