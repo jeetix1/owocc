@@ -4,5 +4,5 @@ public/cgi-bin/*
 public/.htaccess
 
 # Configuration not updated version on git!
-config.php
+config-sensitive.php
 public/logs/*
