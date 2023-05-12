@@ -100,9 +100,10 @@ $conn->close();
 <body>
     <h1>OwO Cookie Clicker!</h1>
     <p>Ongoing development on production here! expect weird things happening ;3</p>
-    <div class="cookie-count"><?= $username ?> has  <span id="cookieCount">
-            <?= $_SESSION['cookieCount'] ?>
-        </span> Cookies! OMG!
+    <div class="cookie-count">
+        <span class="username"><?= $username ?></span> is a Cookie Master!
+        <br>
+        They have collected <span id="cookieCount" class="count"><?= $_SESSION['cookieCount'] ?></span> Cookies! OMG!
     </div>
 
     <!-- Cookie image to click and add a cookie -->
