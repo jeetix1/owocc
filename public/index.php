@@ -13,7 +13,6 @@ if (!isset($_SESSION['username'])) {
     }
 }
 
-// Get the username from the session
 $username = $_SESSION['username'];
 
 // Connect to the database and check if the user exists
@@ -62,7 +61,7 @@ $stmt->execute();
 $stmt->close();
 $conn->close();
 
-// Retrieve the top 10 players from the database
+// Retrieve the top players from the database
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -87,63 +86,66 @@ if ($topPlayersResult->num_rows > 0) {
     }
 }
 
-
 $conn->close();
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Cookie Clicker</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
 
-<h1>Cookie Clicker</h1>
-<p>Ongoing development on production here! expect weird things happening ;3</p>
+    <h1>Cookie Clicker</h1>
+    <p>Ongoing development on production here! expect weird things happening ;3</p>
 
-<!-- Display the current number of cookies -->
-<div class="cookie-count">Cookies: <span id="cookieCount"><?= $_SESSION['cookieCount'] ?></span>
+    <!-- Display the current number of cookies -->
+    <div class="cookie-count">Cookies: <span id="cookieCount">
+            <?= $_SESSION['cookieCount'] ?>
+        </span>
 
-</div>
+    </div>
 
-<!-- Cookie image to click and add a cookie -->
-<div class="cookie-container" id="cookieBtn">
-    <img src="cookie.png" alt="Cookie">
-</div>
+    <!-- Cookie image to click and add a cookie -->
+    <div class="cookie-container" id="cookieBtn">
+        <img src="cookie.png" alt="Cookie">
+    </div>
 
-<!-- Small cookie image to display when the cookie image is clicked -->
-<img class="small-cookie" id="smallCookie" src="cookie-small.png" alt="Small Cookie">
+    <!-- Small cookie image to display when the cookie image is clicked -->
+    <img class="small-cookie" id="smallCookie" src="cookie-small.png" alt="Small Cookie">
 
-<!-- Scoreboard to display top 20 players and their scores -->
-<h2>Scoreboard</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Rank</th>
-            <th>Player</th>
-            <th>Score</th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php
-    $rank = 1;
-    foreach ($topPlayers as $player) {
-        $activeClass = $player['active'] ? 'active-player' : '';
-        echo "<tr class='$activeClass'>";
-        echo "<td>" . $rank . "</td>";
-        echo "<td>" . $player['username'] . "</td>";
-        echo "<td>" . $player['cookieCount'] . "</td>";
-        echo "</tr>";
-        $rank++;
-    }
-    ?>
-</tbody>
-</table>
+    <!-- Scoreboard to display top 20 players and their scores -->
+    <h2>Scoreboard</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $rank = 1;
+            foreach ($topPlayers as $player) {
+                $activeClass = $player['active'] ? 'active-player' : '';
+                echo "<tr class='$activeClass'>";
+                echo "<td>" . $rank . "</td>";
+                echo "<td>" . $player['username'] . "</td>";
+                echo "<td>" . $player['cookieCount'] . "</td>";
+                echo "</tr>";
+                $rank++;
+            }
+            ?>
+        </tbody>
+    </table>
 
-<!-- JavaScript to send an AJAX request when the cookie image is clicked and to display a small cookie at a random location on the screen -->
-<script src="assets/vendor/jquery-3.6.0.min.js"></script>
-<script src="script.js"></script>
+    <!-- JavaScript to send an AJAX request when the cookie image is clicked and to display a small cookie at a random location on the screen -->
+    <script src="assets/vendor/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
