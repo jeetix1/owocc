@@ -66,7 +66,13 @@ if ($topPlayersResult->num_rows > 0) {
         $now = new DateTime();
         $updated_at = new DateTime($row['updated_at']);
         $interval = $now->diff($updated_at);
-        $active = ($interval->i >= 30) ? true : false;
+
+        $totalMinutes = $interval->days * 24 * 60;
+        $totalMinutes += $interval->h * 60;
+        $totalMinutes += $interval->i;
+
+        $active = ($totalMinutes < 480) ? true : false;
+
         $player = array(
             'username' => $row['username'],
             'cookieCount' => $row['cookie_count'],
@@ -75,7 +81,6 @@ if ($topPlayersResult->num_rows > 0) {
         $topPlayers[] = $player;
     }
 }
-
 
 ?>
 
@@ -89,6 +94,7 @@ if ($topPlayersResult->num_rows > 0) {
 
 <body>
     <link rel="stylesheet" type="text/css" href="assets/css/flip_text_animation.css">
+    <!-- <img id="CookieKing" src="./img/kingfluffy.png" alt="Ckookie King Fluffy! OwO"/> -->
     <div class="waviy">
         <h1>
             <span style="--i:1">O</span>
@@ -138,16 +144,19 @@ if ($topPlayersResult->num_rows > 0) {
     }
     ?>
 
-    <div class="cookie-count">
-        <span class="username">
-            <?= $username ?>
+<div class="cookie-count">
+    <span class="username">
+        <?= $username ?>
+    </span>
+    <?= getCookieTitle($_SESSION['cookieCount'], $conn) ?>
+    <br><br><br>
+    <div id="cookieContainer" class="count">
+        <span id="cookieCount">
+            <?= $_SESSION['cookieCount'] ?>
         </span>
-        <?= getCookieTitle($_SESSION['cookieCount'], $conn) ?>
-        <br><br><br>
-        <span id="cookieCount" class="count">
-            <?= $_SESSION['cookieCount'] ?> Cookies!
-        </span>
+        <span> Cookies!</span>
     </div>
+</div>
 
     <!-- Cookie image to click and add a cookie -->
     <div class="cookie-container" id="cookieBtn">
@@ -184,12 +193,12 @@ if ($topPlayersResult->num_rows > 0) {
                 ?>
             </tbody>
         </table>
+        <!-- JavaScript to send an AJAX request when the cookie image is clicked and to display a small cookie at a random location on the screen -->
+        <script src="assets/vendor/jquery-3.6.0.min.js"></script>
+        <script src="script.js"></script>
     </div>
-
-    <!-- JavaScript to send an AJAX request when the cookie image is clicked and to display a small cookie at a random location on the screen -->
-    <script src="assets/vendor/jquery-3.6.0.min.js"></script>
-    <script src="script.js"></script>
-
 </body>
-
+<!-- <div style="cookieking">
+            <img src="./img/kingfluffy.png" alt="Cookie King Fluffy! OwO" width="210px" height="210px">
+        </div> -->
 </html>
