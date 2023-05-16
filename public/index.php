@@ -81,7 +81,6 @@ if ($topPlayersResult->num_rows > 0) {
         $topPlayers[] = $player;
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -120,9 +119,9 @@ if ($topPlayersResult->num_rows > 0) {
     </div>
     <!-- <p>The Epitome of Stable Code!<br> Developed in Production and Merged Straight to Master!<br> What Could Possibly Go Wrong? 😄</p> -->
     <p class="subtitle">
-Crafted in the Wild Jungles of Production, Merged Right into Master with a YOLO Spirit! 🚀<br>
-Because Who Needs Testing? Code is Our Canvas, and Bugs are Just Unexpected Features!<br>
-What Can Pawsibly Go Wrong? 🫠
+        Crafted in the Wild Jungles of Production, Merged Right into Master with a YOLO Spirit! 🚀<br>
+        Because Who Needs Testing? Code is Our Canvas, and Bugs are Just Unexpected Features!<br>
+        What Can Pawsibly Go Wrong? 🫠
     </p>
     <?php
     function getCookieTitle($cookieCount, $conn)
@@ -144,19 +143,19 @@ What Can Pawsibly Go Wrong? 🫠
     }
     ?>
 
-<div class="cookie-count">
-    <span class="username">
-        <?= $username ?>
-    </span>
-    <?= getCookieTitle($_SESSION['cookieCount'], $conn) ?>
-    <br><br><br>
-    <div id="cookieContainer" class="count">
-        <span id="cookieCount">
-            <?= $_SESSION['cookieCount'] ?>
+    <div class="cookie-count">
+        <span class="username">
+            <?= $username ?>
         </span>
-        <span> Cookies!</span>
+        <?= getCookieTitle($_SESSION['cookieCount'], $conn) ?>
+        <br><br><br>
+        <div id="cookieContainer" class="count">
+            <span id="cookieCount">
+                <?= $_SESSION['cookieCount'] ?>
+            </span>
+            <span> Cookies!</span>
+        </div>
     </div>
-</div>
 
     <!-- Cookie image to click and add a cookie -->
     <div class="cookie-container" id="cookieBtn">
@@ -189,8 +188,8 @@ What Can Pawsibly Go Wrong? 🫠
                     echo "</tr>";
                     $rank++;
                 }
-
                 ?>
+
             </tbody>
         </table>
         <!-- JavaScript to send an AJAX request when the cookie image is clicked and to display a small cookie at a random location on the screen -->
@@ -198,7 +197,4 @@ What Can Pawsibly Go Wrong? 🫠
         <script src="script.js"></script>
     </div>
 </body>
-<!-- <div style="cookieking">
-            <img src="./img/kingfluffy.png" alt="Cookie King Fluffy! OwO" width="210px" height="210px">
-        </div> -->
 </html>
