@@ -120,9 +120,9 @@ if ($topPlayersResult->num_rows > 0) {
     </div>
     <!-- <p>The Epitome of Stable Code!<br> Developed in Production and Merged Straight to Master!<br> What Could Possibly Go Wrong? 😄</p> -->
     <p class="subtitle">
-        The Epitome of Stable Code!<br>
-        Developed in Production and Merged Straight to Master!<br>
-        What Could Possibly Go Wrong? 😄
+Crafted in the Wild Jungles of Production, Merged Right into Master with a YOLO Spirit! 🚀<br>
+Because Who Needs Testing? Code is Our Canvas, and Bugs are Just Unexpected Features!<br>
+What Can Pawsibly Go Wrong? 🫠
     </p>
     <?php
     function getCookieTitle($cookieCount, $conn)
