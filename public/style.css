@@ -285,3 +285,26 @@ body {
     background-color: #e74c3c;
     color: #fff;
 }
+
+
+/* .cookieking {
+    position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 310px;
+        height: auto;
+        z-index: -1;
+} */
+
+#CookieKing {
+    position: fixed;
+    bottom: 5em;
+    right: 5em;
+    width: 7em;
+    height: auto;
+    border-radius: 0.6em;
+    z-index: 2
+    
+    
+    ;
+}

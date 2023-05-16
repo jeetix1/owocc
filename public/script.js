@@ -103,3 +103,44 @@ setInterval(function(){
     });
 
 }, 300000); // Cookie monster appears every 5 minutes (300 seconds)
+
+setInterval(function(){
+    // Calculate a random time (1 min average for 10 times per hour)
+    var randomTime = Math.random() * (2 - 0.5) + 0.5; // Random number between 0.5 and 2 minutes
+    randomTime = randomTime * 60 * 1000; // Convert to milliseconds
+
+    setTimeout(function() {
+        var cookieKing = $('<img id="CookieKing" src="./img/kingfluffy.png">');
+        cookieKing.css({position: 'fixed', bottom: '200px', right: '200px'}); // Position in the corner
+        $('body').append(cookieKing);
+        cookieKing.fadeIn(500);
+
+        // Click event for CookieKing
+        cookieKing.click(function() {
+            $(this).fadeOut(500, function() {
+                $(this).remove();
+                kingBonus();
+            });
+        });
+
+        setTimeout(function() {
+            cookieKing.fadeOut(500, function() {
+                $(this).remove();
+            });
+        }, 10000); // CookieKing disappears after 10 seconds (10000 milliseconds)
+
+    }, randomTime);
+
+}, 60000); // Runs every hour
+
+function kingBonus() {
+    for (var i = 0; i < 621; i++) {
+        $.ajax({
+            url: 'addCookie.php',
+            success: function(data) {
+                $('#cookieCount').text(data);
+            }
+        });
+    }
+}
+

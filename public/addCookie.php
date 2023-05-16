@@ -13,11 +13,12 @@ if (!isset($_SESSION['cookieCount'])) {
     $_SESSION['cookieCount'] = 0;
 }
 
+$increment = isset($_GET['increment']) ? intval($_GET['increment']) : 1;
+
 // Increment the cookie count and update the database
-$_SESSION['cookieCount']++;
+$_SESSION['cookieCount'] += $increment;
 $username = $_SESSION['username'];
 $cookieCount = $_SESSION['cookieCount'];
-
 
 $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 if ($conn->connect_error) {
@@ -32,4 +33,5 @@ $conn->close();
 
 // Return the updated cookie count to the client
 echo $cookieCount;
+
 ?>
